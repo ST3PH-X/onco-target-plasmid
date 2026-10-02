@@ -15,7 +15,9 @@ This project introduces a **digital biological gate architecture** that operates
 ### The Biological Evaluation Predicate
 The underlying molecular decision tree operates as a combinatorial logic circuit executing the following digital boolean expression:
 
-$$\text{Therapy\_Trigger} = (\text{Tumor\_Surface\_Marker} \land \text{Extracellular\_Acidity}) \land \neg(\text{Healthy\_Tissue\_Constitutive\_Protein})$$
+$$
+\text{Therapy Trigger} = (\text{Tumor Surface Marker} \land \text{Extracellular Acidity}) \land \neg(\text{Healthy Tissue Constitutive Protein})
+$$
 
 This multi-input verification cycle safeguards healthy organs against accidental drug expression, preventing false-positive triggers through a layered biological handshake.
 
@@ -33,14 +35,10 @@ graph TD
     Gate_NOT -->|Logic Low / 0| Gate_AND2
     
     %% Execution block
-    Gate_AND2 -->|Predicate Validated| Out_Exec[EXECUTE: Triple-Target Plasmide Expression]
+    Gate_AND2 -->|Predicate Validated| Out_Exec[EXECUTE: Triple-Target Plasmid Expression]
     Gate_AND2 -->|Condition Failed| Out_Supp[REMAIN SUPPRESSED: Zero Toxicity State]
-
-    style Gate_AND1 fill:#1f242c,stroke:#388bfd,stroke-width:2px;
-    style Gate_AND2 fill:#1f242c,stroke:#388bfd,stroke-width:2px;
-    style Gate_NOT fill:#1f242c,stroke:#f85149,stroke-width:2px;
-    style Out_Exec fill:#1b4020,stroke:#56d364,stroke-width:2px;
 ```
+
 
 ---
 
