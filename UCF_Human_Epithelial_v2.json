@@ -1,0 +1,76 @@
+{
+  "collection": "environment",
+  "header": {
+    "description": "User Constraint File for Human Epithelial Carcinoma Logic Gate Synthesis",
+    "version": "2.0.1",
+    "author": "Stephaniia Bubnova",
+    "date": "2026-10-03",
+    "organism": "Homo sapiens (Epithelial Tissue Line)",
+    "genome": "Synthetic Plasmid Integration Vector v1.0.4"
+  },
+  "models": [
+    {
+      "name": "PhlF_Repressor_Model",
+      "type": "Hill_Equation",
+      "parameters": {
+        "ymin": 0.012,
+        "ymax": 4.25,
+        "K": 0.32,
+        "n": 2.1
+      }
+    },
+    {
+      "name": "SrpR_Repressor_Model",
+      "type": "Hill_Equation",
+      "parameters": {
+        "ymin": 0.008,
+        "ymax": 3.85,
+        "K": 0.45,
+        "n": 1.9
+      }
+    }
+  ],
+  "genetic_parts": {
+    "promoters": [
+      {
+        "name": "pCEA_Tumor_Sensor",
+        "type": "Input_Sensor",
+        "dnaseq": "ATGCGTACGTACGATCGACTAGCTAGCTAGCTAGCTAGCTAGC"
+      },
+      {
+        "name": "pAcid_Lactate_Sensor",
+        "type": "Input_Sensor",
+        "dnaseq": "CGATCGATCGATCGATCGATCGATCGATCGATCGATCGATCGA"
+      },
+      {
+        "name": "pEpiprotein_Constitutive",
+        "type": "Safety_Override_Sensor",
+        "dnaseq": "GGCTAGCTAGCTAGCTAGCTAGCTAGCTAGCTAGCTAGCTAGC"
+      }
+    ],
+    "gates": [
+      {
+        "name": "AND_Gate_01",
+        "type": "NOR_Inversion_Cascade",
+        "model": "PhlF_Repressor_Model",
+        "inputs": ["pCEA_Tumor_Sensor", "pAcid_Lactate_Sensor"]
+      },
+      {
+        "name": "NOT_Gate_Safety",
+        "type": "Inverter",
+        "model": "SrpR_Repressor_Model",
+        "inputs": ["pEpiprotein_Constitutive"]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "therapeutic_payload_operon",
+        "components": [
+          "Soluble_VEGF_Trap_Sequence",
+          "E_Cadherin_Fusion_Domain",
+          "Anti_PD_L1_scFv_Cassette"
+        ]
+      }
+    ]
+  }
+}
